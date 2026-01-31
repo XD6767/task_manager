@@ -3,3 +3,10 @@ class Task:
         self.name = name
         self.priority = priority
         self.deadline = deadline
+
+    def to_dict(self):
+        return {
+            'имя': self.name,
+            'приоритет': self.priority,
+            'дедлайн': self.deadline
+        }
