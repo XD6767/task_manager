@@ -12,3 +12,7 @@ class Storage:
                 return [Task.from_dict(data) for i in data]
         except(FileNotFoundError, json.JSONDecodeError):
             return []
+
+    def save(self, tasks: list[Task]):
+        with open(self.filename, 'w', encoding='utf-8') as file:
+            json.dump([task.to_dict() for task in tasks], file, ensure_ascii=False, indent=4)
