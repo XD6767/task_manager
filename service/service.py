@@ -26,3 +26,6 @@ class TaskService:
             self.storage.save(self.tasks)
             return True
         return False
+    
+    def get_all_tasks(self) -> list[Task]:
+        return self.tasks
