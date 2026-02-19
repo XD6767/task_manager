@@ -37,3 +37,11 @@ class Ui:
         self.service.add_task(task)
 
         print(f'добавлена задача: {name}')
+
+    def show_task(self):
+        task_list = self.service.get_all_tasks()
+        if len(task_list) > 0:
+            for index, task in enumerate(task_list, start=1):
+                print(f'{index}. Название: {task["имя"]} | Приоритет: {task["приоритет"]} | Дедлайн: {task["дедлайн"]}')
+        else:
+            print('нет задач')
