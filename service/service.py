@@ -13,7 +13,7 @@ class TaskService:
         if index >= 0 and index < len(self.tasks):
             return self.tasks.pop(index)
         return False
-    
+
     def edit_task(self, index, new_name, new_priority, new_deadline):
         if index >= 0 and index < len(self.tasks):
             task = self.tasks[index]
@@ -26,6 +26,13 @@ class TaskService:
             self.storage.save(self.tasks)
             return True
         return False
-    
+
+    def search_tasks(self, name : str):
+        found_notes = []
+        for note in self.tasks:
+            if name in note['name'].lower():
+                found_notes.append(note)
+        return found_notes
+
     def get_all_tasks(self) -> list[Task]:
         return self.tasks
