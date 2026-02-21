@@ -9,7 +9,7 @@ class Storage:
         try:
             with open(self.filename, 'r', encoding='utf-8') as file:
                 data = json.load(file)
-                return [Task.from_dict(data) for i in data]
+                return [Task.from_dict(dict) for dict in data]
         except(FileNotFoundError, json.JSONDecodeError):
             return []
 

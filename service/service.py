@@ -30,7 +30,7 @@ class TaskService:
     def search_tasks(self, name : str):
         found_notes = []
         for note in self.tasks:
-            if name in note['name'].lower():
+            if name in note.name.lower():
                 found_notes.append(note)
         return found_notes
 

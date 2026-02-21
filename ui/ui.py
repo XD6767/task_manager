@@ -20,9 +20,9 @@ class Ui:
             elif choice_user == '5':
                 self.show_task()
             elif choice_user == '2':
-                self.delete_task()
+                self.remove_task()
             elif choice_user == '4':
-                self.search_task()
+                self.search_tasks()
             elif choice_user == '3':
                 self.edit_task()
             elif choice_user == '0':
@@ -42,7 +42,7 @@ class Ui:
         task_list = self.service.get_all_tasks()
         if len(task_list) > 0:
             for index, task in enumerate(task_list, start=1):
-                print(f'{index}. Название: {task["name"]} | Приоритет: {task["priority"]} | Дедлайн: {task["deadline"]}')
+                print(f'{index}. Название: {task.name} | Приоритет: {task.priority} | Дедлайн: {task.deadline}')
         else:
             print('нет задач')
 
@@ -71,6 +71,6 @@ class Ui:
         notes = self.service.search_tasks(name)
         if notes:
             for index, task in enumerate(notes, start=1):
-                print(f'{index}. Название: {task["name"]} | Приоритет: {task["priority"]} | Дедлайн: {task["deadline"]}')
+                print(f'{index}. Название: {task.name} | Приоритет: {task.priority} | Дедлайн: {task.deadline}')
         else:
             print('нет задач')
