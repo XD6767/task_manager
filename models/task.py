@@ -1,14 +1,16 @@
 class Task:
-    def __init__(self, name: str, priority: str, deadline: str):
+    def __init__(self, name: str, priority: str, deadline: str, id: int):
         self.name = name
         self.priority = priority
         self.deadline = deadline
+        self.id = id
 
     def to_dict(self) -> dict:
         return {
             'name': self.name,
             'priority': self.priority,
-            'deadline': self.deadline
+            'deadline': self.deadline,
+            'id': self.id
         }
 
     @staticmethod
@@ -16,13 +18,7 @@ class Task:
         return Task(
             name=dict_task['name'],
             priority=dict_task['priority'],
-            deadline=dict_task['deadline']
+            deadline=dict_task['deadline'],
+            id=dict_task['id']
         )
 
-# task = Task('сьесть шоколадку', 'очень важно', 'сейчас')
-# print(task)
-# task = task.to_dict()
-# task['name']='сьесть банан'
-# print(task)
-# new_object = Task.from_dict(task)
-# print(new_object)
