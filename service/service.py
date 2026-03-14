@@ -43,3 +43,9 @@ class TaskService:
 
     def get_all_tasks(self) -> list[Task]:
         return self.tasks
+    
+    def get_task(self, id):
+        for task in self.tasks:
+            if id == task.id:
+                return task
+        return None
