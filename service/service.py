@@ -4,10 +4,17 @@ class TaskService:
     def __init__(self, storage):
         self.storage = storage
         self.tasks: list[Task] = self.storage.load()
+        self._next_id = max((task.id for task in self.tasks), default=0)+1
 
-    def add_task(self, object_task):
-        self.tasks.append(object_task)
+    def increment_id(self):
+        self._next_id+=1
+
+    def add_task(self, name, priority, deadline):
+        task = Task(name,priority,deadline,self._next_id)
+        self.tasks.append(task)
         self.storage.save(self.tasks)
+        self.increment_id()
+        return task
 
     def remove_task(self, index: int):
         if index >= 0 and index < len(self.tasks):

@@ -33,8 +33,8 @@ class Ui:
         priority = input('введите приоритет задачи: ')
         deadline = input('введите дедлайн: ')
 
-        task = Task(name,priority,deadline)
-        self.service.add_task(task)
+        # task = Task(name,priority,deadline)
+        self.service.add_task(name, priority, deadline)
 
         print(f'добавлена задача: {name}')
 
