@@ -16,9 +16,12 @@ class TaskService:
         self.increment_id()
         return task
 
-    def remove_task(self, index: int):
-        if index >= 0 and index < len(self.tasks):
-            return self.tasks.pop(index)
+    def remove_task(self, id: int):
+        task = self.get_task(id)
+        if task:
+            self.tasks.remove(task)
+            self.storage.save(self.tasks)
+            return True
         return False
 
     def edit_task(self, new_name: str, new_priority: str, new_deadline: str, id: int):
