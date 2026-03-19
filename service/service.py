@@ -21,9 +21,9 @@ class TaskService:
             return self.tasks.pop(index)
         return False
 
-    def edit_task(self, index, new_name, new_priority, new_deadline):
-        if index >= 0 and index < len(self.tasks):
-            task = self.tasks[index]
+    def edit_task(self, new_name: str, new_priority: str, new_deadline: str, id: int):
+        task = self.get_task(id)
+        if task:
             if new_name:
                 task.name = new_name
             if new_priority:
