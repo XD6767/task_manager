@@ -5,9 +5,10 @@ class TableModel(QAbstractTableModel):
         super().__init__()
         self._service = service
         self._titles = ('name', 'priority', 'deadline')
+        self.tasks = self._service.get_all_tasks()
 
     def rowCount(self, parent=QModelIndex()):
-        return len(self._service.get_all_tasks())
+        return len(self.tasks)
     
     def columnCount(self, parent=QModelIndex()):
         return len(self._titles)
@@ -21,8 +22,7 @@ class TableModel(QAbstractTableModel):
         if not index.isValid():
             return None
         if role == Qt.DisplayRole:
-            tasks = self._service.get_all_tasks()
-            task = tasks[index.row()]
+            task = self.tasks[index.row()]
             column = index.column()
             if column == 0:
                 return task.name
@@ -31,3 +31,8 @@ class TableModel(QAbstractTableModel):
             elif column == 2:
                 return task.deadline
         return None
+    
+    def refresh(self):
+        self.beginResetModel()
+        self.tasks = self._service.get_all_tasks()
+        self.endResetModel()
