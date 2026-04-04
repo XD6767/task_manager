@@ -3,7 +3,7 @@ from service.service import TaskService
 from ui.table_model import TableModel
 
 import sys
-from Pyside6.QtWidgets import QMainWindow, QTableView, QApplication
+from PySide6.QtWidgets import QMainWindow, QTableView, QApplication
 filename = './task.json'
 
 def runner():
