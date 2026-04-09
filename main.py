@@ -1,23 +1,12 @@
-from storage.storage import Storage
-from service.service import TaskService
-from ui.table_model import TableModel
+
+from ui.window_view import MainWindow
 
 import sys
 from PySide6.QtWidgets import QMainWindow, QTableView, QApplication
-filename = './task.json'
 
 def runner():
     app = QApplication([])
-    storage = Storage(filename)
-    service = TaskService(storage)
-
-    window = QMainWindow()
-    table = QTableView()
-    model = TableModel(service)
-    table.setModel(model)
-    
-    window.setCentralWidget(table)
-    window.resize(800, 800)
+    window = MainWindow()
     window.show()
     sys.exit(app.exec())
 
