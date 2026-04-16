@@ -28,12 +28,6 @@ class MainWindow(QMainWindow):
 
         self.setCentralWidget(container)
         
-    # создать метод add_task 
-    # метод вызывает добавление задачи из сервиса(не забудь передать аргументы)
-    # вызвать обновление модели таблицы
-
-    # найти информацию про QVBoxLayout(как работает, зачем нужен)
-
     def add_task(self):
         self.service.add_task('name', 'priority', 'deadline')
         self.model.refresh()
