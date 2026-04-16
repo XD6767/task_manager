@@ -16,7 +16,7 @@ class MainWindow(QMainWindow):
         self.table = QTableView()
         self.table.setModel(self.model)
 
-        self.add_button = QPushButton('йцукенгшщз')
+        self.add_button = QPushButton('добавить задачу')
         self.add_button.clicked.connect(self.add_task)
         
         main_layout = QVBoxLayout()
