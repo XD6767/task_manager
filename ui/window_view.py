@@ -1,6 +1,7 @@
 from PySide6.QtWidgets import QMainWindow, QTableView, QPushButton, QVBoxLayout, QWidget
 from storage.storage import Storage
 from service.service import TaskService
+from ui.dialog_window import DialogWindow
 from ui.table_model import TableModel
 
 class MainWindow(QMainWindow):
@@ -29,5 +30,6 @@ class MainWindow(QMainWindow):
         self.setCentralWidget(container)
         
     def add_task(self):
-        self.service.add_task('name', 'priority', 'deadline')
-        self.model.refresh()
+        # self.service.add_task('name', 'priority', 'deadline')
+        # self.model.refresh()
+        dialog = DialogWindow(self)
