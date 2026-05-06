@@ -1,4 +1,4 @@
-from PySide6.QtWidgets import QDialog, QLineEdit, QComboBox, QDateEdit, QPushButton, QHBoxLayout, QVBoxLayout
+from PySide6.QtWidgets import QDialog, QLineEdit, QComboBox, QDateEdit, QPushButton, QHBoxLayout, QVBoxLayout, QLabel
 from PySide6.QtCore import Qt, QDate
 
 class DialogWindow(QDialog):
@@ -18,29 +18,33 @@ class DialogWindow(QDialog):
 
         self.choice_date = QDateEdit()
         self.choice_date.setDate(QDate.currentDate())
+        self.choice_date.setCalendarPopup(True)
 
+        name_label = QLabel('Название')
+        priority_label = QLabel('Приоритет')
+        date_label = QLabel('Дата')
+
+        control_elements_layout.addWidget(name_label)
         control_elements_layout.addWidget(self.line_edit)
+        control_elements_layout.addWidget(priority_label)
         control_elements_layout.addWidget(self.choice_priority)
+        control_elements_layout.addWidget(date_label)
         control_elements_layout.addWidget(self.choice_date)
 
         self.add_button = QPushButton('добавить')
         self.add_button.clicked.connect(self.accept)
+        self.add_button.setAutoDefault(False)
 
         self.cancel_button = QPushButton('отмена')
         self.cancel_button.clicked.connect(self.reject)
+        self.cancel_button.setAutoDefault(False)
 
         buttons_layout = QHBoxLayout()
-        buttons_layout.addWidget(self.add_button)
         buttons_layout.addWidget(self.cancel_button)
+        buttons_layout.addWidget(self.add_button)
 
         main_layout = QVBoxLayout()
         main_layout.addLayout(control_elements_layout)
         main_layout.addLayout(buttons_layout)
 
         self.setLayout(main_layout)
-
-        # def on_accept()
-
-        # 1. Найти информацию о QLabel 
-        # 2. Создать Layoutы для полей и кнопок(отдельные)
-        # 3. С помощью метода addWidget добавить кнопки и заголовки в layout
