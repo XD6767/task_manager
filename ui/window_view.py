@@ -7,7 +7,7 @@ from ui.table_model import TableModel
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
-        self.resize(800, 800)
+        self.resize(500, 500)
         self.setWindowTitle('task manager')
 
         self.filename = './task.json'

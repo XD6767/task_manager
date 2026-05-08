@@ -32,7 +32,7 @@ class DialogWindow(QDialog):
         control_elements_layout.addWidget(self.choice_date)
 
         self.add_button = QPushButton('добавить')
-        self.add_button.clicked.connect(self.accept)
+        self.add_button.clicked.connect(self.accept, )
         self.add_button.setAutoDefault(False)
 
         self.cancel_button = QPushButton('отмена')
@@ -48,3 +48,9 @@ class DialogWindow(QDialog):
         main_layout.addLayout(buttons_layout)
 
         self.setLayout(main_layout)
+
+        def get_task():
+            user_text = self.line_edit.text()
+            user_priority = self.choice_priority.currentText()
+            user_date = self.choice_date.date()
+            return user_text, user_priority, user_date
