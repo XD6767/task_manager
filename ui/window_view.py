@@ -33,4 +33,6 @@ class MainWindow(QMainWindow):
         # self.service.add_task('name', 'priority', 'deadline')
         # self.model.refresh()
         dialog = DialogWindow(self)
-        dialog.exec()
+        if dialog.exec():
+            self.service.add_task(*dialog.get_task())
+            self.model.refresh()

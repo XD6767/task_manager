@@ -49,8 +49,8 @@ class DialogWindow(QDialog):
 
         self.setLayout(main_layout)
 
-        def get_task():
-            user_text = self.line_edit.text()
-            user_priority = self.choice_priority.currentText()
-            user_date = self.choice_date.date()
-            return user_text, user_priority, user_date
+    def get_task(self):
+        user_text = self.line_edit.text()
+        user_priority = self.choice_priority.currentText()
+        user_date = self.choice_date.date().toString('dd-MM-yyyy')
+        return user_text, user_priority, user_date
