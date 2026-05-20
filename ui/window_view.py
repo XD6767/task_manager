@@ -1,4 +1,4 @@
-from PySide6.QtWidgets import QMainWindow, QTableView, QPushButton, QVBoxLayout, QWidget
+from PySide6.QtWidgets import QMainWindow, QTableView, QPushButton, QVBoxLayout, QWidget, QHBoxLayout, QLineEdit, QHeaderView
 from storage.storage import Storage
 from service.service import TaskService
 from ui.dialog_window import DialogWindow
@@ -16,13 +16,26 @@ class MainWindow(QMainWindow):
         self.model = TableModel(self.service)
         self.table = QTableView()
         self.table.setModel(self.model)
+        self.table.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
+
+        self.search_element = QLineEdit()
+        self.search_element.setPlaceholderText('Поиск')
 
         self.add_button = QPushButton('добавить задачу')
         self.add_button.clicked.connect(self.add_task)
+
+        self.delete_button = QPushButton('удалить задачу')
+
+        button_layout = QHBoxLayout()
+        button_layout.addWidget(self.add_button)
+        button_layout.addWidget(self.delete_button)
         
         main_layout = QVBoxLayout()
+        main_layout.addWidget(self.search_element)
         main_layout.addWidget(self.table)
-        main_layout.addWidget(self.add_button)
+        main_layout.addLayout(button_layout)
+        # main_layout.addWidget(self.add_button)
+        # main_layout.addWidget(self.delete_button)
 
         container = QWidget()
         container.setLayout(main_layout)
