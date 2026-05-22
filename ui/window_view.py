@@ -1,4 +1,4 @@
-from PySide6.QtWidgets import QMainWindow, QTableView, QPushButton, QVBoxLayout, QWidget, QHBoxLayout, QLineEdit, QHeaderView
+from PySide6.QtWidgets import QMainWindow, QTableView, QPushButton, QVBoxLayout, QWidget, QHBoxLayout, QLineEdit, QHeaderView, QAbstractItemView
 from storage.storage import Storage
 from service.service import TaskService
 from ui.dialog_window import DialogWindow
@@ -17,6 +17,7 @@ class MainWindow(QMainWindow):
         self.table = QTableView()
         self.table.setModel(self.model)
         self.table.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
+        self.table.setSelectionBehavior(QAbstractItemView.SelectRows)
 
         self.search_element = QLineEdit()
         self.search_element.setPlaceholderText('Поиск')
@@ -25,6 +26,8 @@ class MainWindow(QMainWindow):
         self.add_button.clicked.connect(self.add_task)
 
         self.delete_button = QPushButton('удалить задачу')
+        self.delete_button.clicked.connect(self.delete_task)
+
 
         button_layout = QHBoxLayout()
         button_layout.addWidget(self.add_button)
@@ -34,8 +37,6 @@ class MainWindow(QMainWindow):
         main_layout.addWidget(self.search_element)
         main_layout.addWidget(self.table)
         main_layout.addLayout(button_layout)
-        # main_layout.addWidget(self.add_button)
-        # main_layout.addWidget(self.delete_button)
 
         container = QWidget()
         container.setLayout(main_layout)
@@ -43,9 +44,14 @@ class MainWindow(QMainWindow):
         self.setCentralWidget(container)
         
     def add_task(self):
-        # self.service.add_task('name', 'priority', 'deadline')
-        # self.model.refresh()
         dialog = DialogWindow(self)
         if dialog.exec():
             self.service.add_task(*dialog.get_task())
             self.model.refresh()
+
+    def delete_task(self):
+        current_row = self.table.selectionModel().selectedRows()
+        row = current_row[0].row()
+        task = self.model.tasks[row]
+        self.service.remove_task(task.id)
+        self.model.refresh()
