@@ -2,10 +2,13 @@ from PySide6.QtWidgets import QDialog, QLineEdit, QComboBox, QDateEdit, QPushBut
 from PySide6.QtCore import Qt, QDate
 
 class DialogWindow(QDialog):
-    def __init__(self, parent=None):
+    def __init__(self, parent=None, task=None):
         super().__init__()
         self.resize(300, 300)
-        self.setWindowTitle('добавление задачи')
+        if task:
+            self.setWindowTitle('редактирование задачи')
+        else:
+            self.setWindowTitle('добавление задачи')
         self.setWindowModality(Qt.WindowModality.WindowModal)
 
         control_elements_layout = QVBoxLayout()
@@ -31,7 +34,10 @@ class DialogWindow(QDialog):
         control_elements_layout.addWidget(date_label)
         control_elements_layout.addWidget(self.choice_date)
 
-        self.add_button = QPushButton('добавить')
+        if task:
+            self.add_button = QPushButton('изменить')
+        else:
+            self.add_button = QPushButton('добавить')
         self.add_button.clicked.connect(self.accept, )
         self.add_button.setAutoDefault(False)
 
@@ -46,6 +52,11 @@ class DialogWindow(QDialog):
         main_layout = QVBoxLayout()
         main_layout.addLayout(control_elements_layout)
         main_layout.addLayout(buttons_layout)
+
+        if task:
+            self.line_edit.setText(task.name)
+            self.choice_priority.setCurrentText(task.priority)
+            self.choice_date.setDate(QDate.fromString(task.date, 'dd-MM-yyyy'))
 
         self.setLayout(main_layout)
 

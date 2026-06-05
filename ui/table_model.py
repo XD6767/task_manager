@@ -4,7 +4,7 @@ class TableModel(QAbstractTableModel):
     def __init__(self, service):
         super().__init__()
         self._service = service
-        self._titles = ('name', 'priority', 'deadline')
+        self._titles = ('Имя', 'Приоритет', 'Дедлайн')
         self.tasks = self._service.get_all_tasks()
 
     def rowCount(self, parent=QModelIndex()):
@@ -32,7 +32,11 @@ class TableModel(QAbstractTableModel):
                 return task.deadline
         return None
     
-    def refresh(self):
+    def set_tasks(self, tasks):
         self.beginResetModel()
-        self.tasks = self._service.get_all_tasks()
+        self.tasks = tasks
         self.endResetModel()
+        
+    
+    def refresh(self):
+        self.set_tasks(self._service.get_all_tasks())
