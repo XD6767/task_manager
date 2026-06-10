@@ -56,7 +56,7 @@ class DialogWindow(QDialog):
         if task:
             self.line_edit.setText(task.name)
             self.choice_priority.setCurrentText(task.priority)
-            self.choice_date.setDate(QDate.fromString(task.date, 'dd-MM-yyyy'))
+            self.choice_date.setDate(QDate.fromString(task.deadline, 'dd-MM-yyyy'))
 
         self.setLayout(main_layout)
 

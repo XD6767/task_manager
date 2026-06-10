@@ -43,6 +43,7 @@ class MainWindow(QMainWindow):
         main_layout.addWidget(self.search_element)
         main_layout.addWidget(self.table)
         main_layout.addLayout(elements_control_wrapper)
+        main_layout.addLayout(button_layout)
 
         container = QWidget()
         container.setLayout(main_layout)
@@ -70,11 +71,13 @@ class MainWindow(QMainWindow):
             return
         
     def edit_task(self):
-        # 1. выбрать текущий ряд 
-        # 2. получить объект задачи
-        # 3. вызвать dialog и передать туда объект
-        # 4. если dialog выполнен получить из него данные и отправить их в сервис
-        # 5. refrashe
+        current_row = self.table.selectionModel().selectedRows()
+        row = current_row[0].row()
+        task = self.model.tasks[row]
+        dialog = DialogWindow(self, task)
+        if dialog.exec():
+            self.service.edit_task(*dialog.get_task(), task.id)
+            self.model.refresh()
 
     def search_task(self, user_text):
         tasks = self.service.search_tasks(user_text)
