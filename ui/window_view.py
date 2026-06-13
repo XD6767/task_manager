@@ -18,19 +18,67 @@ class MainWindow(QMainWindow):
         self.table.setModel(self.model)
         self.table.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
         self.table.setSelectionBehavior(QAbstractItemView.SelectRows)
+        self.table.setStyleSheet('''
+            QTableView::item:selected {
+                color: #506CE0;
+                background-color: #CCE2F2
+            }
+                                 
+            '''          
+        )
+        
 
         self.search_element = QLineEdit()
         self.search_element.setPlaceholderText('Поиск')
         self.search_element.textChanged.connect(self.search_task)
+        self.search_element.setStyleSheet('''
+            QLineEdit {
+                border: 2px solid #88DFF;
+                background-color: #CCE2F2;
+                color: #2A4FD6
+            }
+
+            '''
+        )
 
         self.add_button = QPushButton('добавить задачу')
         self.add_button.clicked.connect(self.add_task)
+        self.add_button.setStyleSheet(
+            '''
+            QPushButton {
+                border: 2px solid #9AFF99;
+                background-color: #E0F9E0;
+                color: #266825
+            }
 
+            '''
+        )
+        
         self.delete_button = QPushButton('удалить задачу')
         self.delete_button.clicked.connect(self.delete_task)
+        self.delete_button.setStyleSheet(
+            '''
+            QPushButton {
+                border: 2px solid #FF9293;
+                background-color: #F9D8D9;
+                color: #68252E
+            }
+
+            '''
+        )
 
         self.edit_button = QPushButton('редактировать задачу')
         self.edit_button.clicked.connect(self.edit_task)
+        self.edit_button.setStyleSheet(
+            '''
+            QPushButton {
+                border: 2px solid #FFC681;
+                background-color: #F7EBDC;
+                color: #873F00
+            }
+
+            '''
+        )
 
         elements_control_wrapper = QVBoxLayout()
         elements_control_wrapper.addWidget(self.add_button)

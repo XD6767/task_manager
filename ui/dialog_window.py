@@ -36,14 +36,41 @@ class DialogWindow(QDialog):
 
         if task:
             self.add_button = QPushButton('изменить')
+            self.add_button.setStyleSheet(
+            '''
+            QPushButton {
+                border: 2px solid #FFC681;
+                background-color: #F7EBDC
+            }
+
+            '''
+        )
         else:
             self.add_button = QPushButton('добавить')
         self.add_button.clicked.connect(self.accept, )
         self.add_button.setAutoDefault(False)
+        self.add_button.setStyleSheet(
+            '''
+            QPushButton {
+                border: 2px solid #9AFF99;
+                background-color: #E0F9E0
+            }
+
+            '''
+        )
 
         self.cancel_button = QPushButton('отмена')
         self.cancel_button.clicked.connect(self.reject)
         self.cancel_button.setAutoDefault(False)
+        self.cancel_button.setStyleSheet(
+            '''
+            QPushButton {
+                border: 2px solid #FF9293;
+                background-color: #F9D8D9
+            }
+
+            '''
+        )
 
         buttons_layout = QHBoxLayout()
         buttons_layout.addWidget(self.cancel_button)
