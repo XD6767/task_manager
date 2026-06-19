@@ -10,7 +10,7 @@ class MainWindow(QMainWindow):
         self.resize(500, 500)
         self.setWindowTitle('Менеджер задач')
 
-        self.filename = './task.json'
+        self.filename = './tasks.db'
         self.storage = Storage(self.filename)
         self.service = TaskService(self.storage)
         self.model = TableModel(self.service)
