@@ -33,7 +33,7 @@ class MainWindow(QMainWindow):
         self.search_element.textChanged.connect(self.search_task)
         self.search_element.setStyleSheet('''
             QLineEdit {
-                border: 2px solid #88DFF;
+                border: 2px solid #88D0FF;
                 background-color: #CCE2F2;
                 color: #2A4FD6
             }
